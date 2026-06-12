@@ -1,0 +1,14 @@
+{
+  "id": "emmet67/gate-a-routing-cost-audit",
+  "title": "Gate A: routing cost audit (CM0 vs CM1)",
+  "code_file": "gate_a.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_internet": "true",
+  "dataset_sources": ["emmet67/routing-audit-convs"],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
