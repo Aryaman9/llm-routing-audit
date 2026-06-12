@@ -1,0 +1,40 @@
+{
+  "prefix_tokens_cl100k": 5235,
+  "probe": {
+    "provider": "anthropic",
+    "calls": {
+      "A_cold": {
+        "model": "claude-haiku-4-5-20251001",
+        "wall_s": 58.973,
+        "input_tokens": 13,
+        "cache_creation_input_tokens": 6095,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 4
+      },
+      "B_warm_same_model": {
+        "model": "claude-haiku-4-5-20251001",
+        "wall_s": 0.794,
+        "input_tokens": 14,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 6095,
+        "output_tokens": 5
+      },
+      "C_other_model": {
+        "model": "claude-sonnet-4-6",
+        "wall_s": 2.107,
+        "input_tokens": 13,
+        "cache_creation_input_tokens": 6096,
+        "cache_read_input_tokens": 0,
+        "output_tokens": 4
+      },
+      "D_warm_other_model": {
+        "model": "claude-sonnet-4-6",
+        "wall_s": 1.909,
+        "input_tokens": 13,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 6096,
+        "output_tokens": 4
+      }
+    }
+  }
+}

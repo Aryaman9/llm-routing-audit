@@ -10,9 +10,11 @@
       "cache_ttl_seconds": 300,
       "cache_ttl_refreshes_on_read": true,
       "min_cacheable_prefix_tokens": 1024,
+      "min_cacheable_prefix_tokens_haiku": 4096,
       "cache_block_tokens": 1,
       "caching_is_explicit": true,
       "verified_by_probe": false,
+      "probe_evidence_2026-06-12": "results/probes/probe_anthropic_2026-06-12.json: same-model warm read (P1), cross-model isolation (P2), three separate billing meters with input_tokens EXCLUDING cache traffic (P3) all verified on claude-haiku-4-5 + claude-sonnet-4-6. Haiku min cacheable prefix bracketed (3784, 6095] anthropic-tokens, consistent with 4096. Anthropic tokenizer counts ~16% more tokens than cl100k on identical text. Price multipliers still unverified (need invoice cross-check).",
       "sources": [
         "https://www.finout.io/blog/anthropic-api-pricing",
         "https://artificialanalysis.ai/models/caching"
@@ -32,6 +34,7 @@
       "cache_block_tokens": 128,
       "caching_is_explicit": false,
       "verified_by_probe": false,
+      "probe_evidence_2026-06-12": "results/probes/probe_2026-06-12.json: same-model warm read (P1: 4992 cached of 5109 prompt tokens) and cross-model isolation (P2: 0 cached on identical prefix, different model) verified on gpt-5-mini + gpt-4.1-mini. Block granularity 128 confirmed (hits are exact multiples: 3072, 4992). Cache observed surviving >10 min across probe runs (TTL evidence). cached_tokens reported in usage.prompt_tokens_details (P3). Price multiplier (0.5) still unverified.",
       "sources": [
         "https://aicostcheck.com/blog/ai-prompt-caching-cost-savings"
       ],

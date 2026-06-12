@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-12",
+  "prefix_tokens_cl100k": 5235,
+  "probes": [
+    {
+      "provider": "anthropic",
+      "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>"
+    },
+    {
+      "provider": "openai",
+      "models_available_picked": [
+        "gpt-5-mini",
+        "gpt-4.1-mini"
+      ],
+      "calls": {
+        "A_cold": {
+          "model": "gpt-5-mini",
+          "wall_s": 1.387,
+          "prompt_tokens": 5109,
+          "cached_tokens": 0,
+          "completion_tokens": 16
+        },
+        "B_warm_same_model": {
+          "model": "gpt-5-mini",
+          "wall_s": 1.019,
+          "prompt_tokens": 5109,
+          "cached_tokens": 4992,
+          "completion_tokens": 16
+        },
+        "C_other_model": {
+          "model": "gpt-4.1-mini",
+          "wall_s": 1.148,
+          "prompt_tokens": 5111,
+          "cached_tokens": 0,
+          "completion_tokens": 2
+        }
+      }
+    }
+  ]
+}
