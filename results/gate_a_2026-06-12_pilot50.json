@@ -1,0 +1,640 @@
+{
+  "date": "2026-06-12",
+  "router": "routellm/bert_gpt4_augmented",
+  "system_tokens": 1000,
+  "gap_s": 30.0,
+  "datasets": {
+    "wildchat": {
+      "n_convs": 50,
+      "real_ts_convs": 0,
+      "providers": {
+        "anthropic": {
+          "fixed-small": {
+            "cm0": 0.5287999999999999,
+            "cm1": 0.3944197,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.606141357685846,
+            "savings_cm0": 0.6666666666666669,
+            "savings_cm1": 0.6666666666666667,
+            "overstatement_pct": 1.6653345369377342e-14
+          },
+          "fixed-large": {
+            "cm0": 1.5864000000000007,
+            "cm1": 1.1832591000000001,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.606141357685846,
+            "savings_cm0": 0.0,
+            "savings_cm1": 0.0,
+            "overstatement_pct": NaN
+          },
+          "routellm@10%strong": {
+            "cm0": 0.6861139999999997,
+            "cm1": 0.53896905,
+            "switches_per_conv": 0.16,
+            "cache_hit_rate": 0.5682252940100138,
+            "savings_cm0": 0.5675025214321738,
+            "savings_cm1": 0.5445046228674684,
+            "overstatement_pct": 4.05247513379623
+          },
+          "sticky-routellm@10%strong": {
+            "cm0": 0.7561499999999997,
+            "cm1": 0.5706881999999999,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.606141357685846,
+            "savings_cm0": 0.5233547655068083,
+            "savings_cm1": 0.5176980257324877,
+            "overstatement_pct": 1.0808614246289854
+          },
+          "random@10%strong": {
+            "cm0": 0.6597019999999999,
+            "cm1": 0.5635469000000001,
+            "switches_per_conv": 0.44,
+            "cache_hit_rate": 0.5220586522946921,
+            "savings_cm0": 0.5841515380736261,
+            "savings_cm1": 0.5237333057485043,
+            "overstatement_pct": 10.342903919137965
+          },
+          "routellm@30%strong": {
+            "cm0": 0.9181139999999999,
+            "cm1": 0.7800864500000002,
+            "switches_per_conv": 0.64,
+            "cache_hit_rate": 0.4813813064524178,
+            "savings_cm0": 0.4212594553706509,
+            "savings_cm1": 0.3407306565400594,
+            "overstatement_pct": 19.116199720606183
+          },
+          "sticky-routellm@30%strong": {
+            "cm0": 1.0365920000000004,
+            "cm1": 0.7795612000000001,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.606141357685846,
+            "savings_cm0": 0.34657589510842157,
+            "savings_cm1": 0.3411745576264742,
+            "overstatement_pct": 1.5584861954284621
+          },
+          "random@30%strong": {
+            "cm0": 0.8016019999999999,
+            "cm1": 0.7258578500000002,
+            "switches_per_conv": 1.06,
+            "cache_hit_rate": 0.45587770514164044,
+            "savings_cm0": 0.494703731719617,
+            "savings_cm1": 0.3865605174724621,
+            "overstatement_pct": 21.860197793787243
+          },
+          "routellm@50%strong": {
+            "cm0": 1.105296,
+            "cm1": 0.8968305000000001,
+            "switches_per_conv": 0.78,
+            "cache_hit_rate": 0.491365171249397,
+            "savings_cm0": 0.3032677760968233,
+            "savings_cm1": 0.24206752350351668,
+            "overstatement_pct": 20.180268863701308
+          },
+          "sticky-routellm@50%strong": {
+            "cm0": 1.1425520000000002,
+            "cm1": 0.8592207999999999,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.606141357685846,
+            "savings_cm0": 0.2797831568330814,
+            "savings_cm1": 0.27385236251299494,
+            "overstatement_pct": 2.1197824726900145
+          },
+          "random@50%strong": {
+            "cm0": 0.9777860000000002,
+            "cm1": 0.8389775500000001,
+            "switches_per_conv": 1.04,
+            "cache_hit_rate": 0.4496631568441539,
+            "savings_cm0": 0.3836447302067576,
+            "savings_cm1": 0.2909604075726103,
+            "overstatement_pct": 24.158893720290887
+          },
+          "routellm@70%strong": {
+            "cm0": 1.2871360000000003,
+            "cm1": 1.0218869999999998,
+            "switches_per_conv": 0.76,
+            "cache_hit_rate": 0.5000748540346325,
+            "savings_cm0": 0.1886434694906709,
+            "savings_cm1": 0.13637934413519437,
+            "overstatement_pct": 27.705239675981037
+          },
+          "sticky-routellm@70%strong": {
+            "cm0": 1.3685580000000008,
+            "cm1": 1.0097761,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.606141357685846,
+            "savings_cm0": 0.13731845688350974,
+            "savings_cm1": 0.1466145495944211,
+            "overstatement_pct": -6.769732869047197
+          },
+          "random@70%strong": {
+            "cm0": 1.3034760000000003,
+            "cm1": 1.0832895,
+            "switches_per_conv": 1.04,
+            "cache_hit_rate": 0.4433188615533044,
+            "savings_cm0": 0.17834341906202744,
+            "savings_cm1": 0.08448665216265827,
+            "overstatement_pct": 52.626986402411625
+          },
+          "routellm@90%strong": {
+            "cm0": 1.4981120000000006,
+            "cm1": 1.1457067500000002,
+            "switches_per_conv": 0.34,
+            "cache_hit_rate": 0.5578521882329458,
+            "savings_cm0": 0.05565305093292994,
+            "savings_cm1": 0.03173637118024264,
+            "overstatement_pct": 42.97460669588518
+          },
+          "sticky-routellm@90%strong": {
+            "cm0": 1.5573120000000007,
+            "cm1": 1.1585488999999998,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.606141357685846,
+            "savings_cm0": 0.01833585476550681,
+            "savings_cm1": 0.020883169206136087,
+            "overstatement_pct": -13.892531726534262
+          },
+          "random@90%strong": {
+            "cm0": 1.4776180000000005,
+            "cm1": 1.14439645,
+            "switches_per_conv": 0.48,
+            "cache_hit_rate": 0.5370061712992997,
+            "savings_cm0": 0.06857160867372669,
+            "savings_cm1": 0.032843736422563885,
+            "overstatement_pct": 52.103010184814266
+          }
+        },
+        "openai": {
+          "fixed-small": {
+            "cm0": 0.28989420000000005,
+            "cm1": 0.23690219999999992,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.5876540745546185,
+            "savings_cm0": 0.88,
+            "savings_cm1": 0.8800000000000001,
+            "overstatement_pct": -1.261617073437678e-14
+          },
+          "fixed-large": {
+            "cm0": 2.415785,
+            "cm1": 1.9741850000000005,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.5876540745546185,
+            "savings_cm0": 0.0,
+            "savings_cm1": 0.0,
+            "overstatement_pct": NaN
+          },
+          "routellm@10%strong": {
+            "cm0": 0.5993154,
+            "cm1": 0.5082690000000001,
+            "switches_per_conv": 0.16,
+            "cache_hit_rate": 0.5506063176805229,
+            "savings_cm0": 0.7519169131358958,
+            "savings_cm1": 0.7425423655837726,
+            "overstatement_pct": 1.246753117046711
+          },
+          "sticky-routellm@10%strong": {
+            "cm0": 0.7374753999999999,
+            "cm1": 0.6118306000000002,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.5876540745546185,
+            "savings_cm0": 0.6947263932841706,
+            "savings_cm1": 0.690084465235021,
+            "overstatement_pct": 0.6681663593067082
+          },
+          "random@10%strong": {
+            "cm0": 0.5481346,
+            "cm1": 0.49632020000000004,
+            "switches_per_conv": 0.44,
+            "cache_hit_rate": 0.5058935076600629,
+            "savings_cm0": 0.7731029044389298,
+            "savings_cm1": 0.7485948885236187,
+            "overstatement_pct": 3.1700845740707124
+          },
+          "routellm@30%strong": {
+            "cm0": 1.0663357999999998,
+            "cm1": 0.9322430000000002,
+            "switches_per_conv": 0.64,
+            "cache_hit_rate": 0.46586489678460336,
+            "savings_cm0": 0.558596563849846,
+            "savings_cm1": 0.5277833637678333,
+            "overstatement_pct": 5.516181458340564
+          },
+          "sticky-routellm@30%strong": {
+            "cm0": 1.3020878000000002,
+            "cm1": 1.072251,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.5876540745546185,
+            "savings_cm0": 0.4610084092748319,
+            "savings_cm1": 0.45686397171491033,
+            "overstatement_pct": 0.8989939177987603
+          },
+          "random@30%strong": {
+            "cm0": 0.8319741999999999,
+            "cm1": 0.7662846000000001,
+            "switches_per_conv": 1.06,
+            "cache_hit_rate": 0.44116639220187304,
+            "savings_cm0": 0.6556091705180718,
+            "savings_cm1": 0.6118476231964076,
+            "overstatement_pct": 6.674944355504232
+          },
+          "routellm@50%strong": {
+            "cm0": 1.4475958,
+            "cm1": 1.2227125999999997,
+            "switches_per_conv": 0.78,
+            "cache_hit_rate": 0.47651080393233197,
+            "savings_cm0": 0.40077622801698,
+            "savings_cm1": 0.38064943255064776,
+            "overstatement_pct": 5.021953414232817
+          },
+          "sticky-routellm@50%strong": {
+            "cm0": 1.5162578,
+            "cm1": 1.2475602000000001,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.5876540745546185,
+            "savings_cm0": 0.37235399673398095,
+            "savings_cm1": 0.36806317543695255,
+            "overstatement_pct": 1.1523500042068495
+          },
+          "random@50%strong": {
+            "cm0": 1.1949521999999997,
+            "cm1": 1.0411345999999997,
+            "switches_per_conv": 1.04,
+            "cache_hit_rate": 0.43477884791323584,
+            "savings_cm0": 0.5053565611178148,
+            "savings_cm1": 0.4726256151272553,
+            "overstatement_pct": 6.476802422068256
+          },
+          "routellm@70%strong": {
+            "cm0": 1.8143137999999999,
+            "cm1": 1.5146018,
+            "switches_per_conv": 0.76,
+            "cache_hit_rate": 0.4850275296505148,
+            "savings_cm0": 0.2489754676016286,
+            "savings_cm1": 0.23279641978841914,
+            "overstatement_pct": 6.498249795074837
+          },
+          "sticky-routellm@70%strong": {
+            "cm0": 1.9774174000000004,
+            "cm1": 1.6050910000000005,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.5876540745546185,
+            "savings_cm0": 0.18145969115629068,
+            "savings_cm1": 0.18696018863480368,
+            "overstatement_pct": -3.0312503253273135
+          },
+          "random@70%strong": {
+            "cm0": 1.8457738,
+            "cm1": 1.5744650000000004,
+            "switches_per_conv": 1.04,
+            "cache_hit_rate": 0.429242976196417,
+            "savings_cm0": 0.23595278553348087,
+            "savings_cm1": 0.20247342574277483,
+            "overstatement_pct": 14.189008074225699
+          },
+          "routellm@90%strong": {
+            "cm0": 2.2358206000000003,
+            "cm1": 1.8426174000000006,
+            "switches_per_conv": 0.34,
+            "cache_hit_rate": 0.5412379193905218,
+            "savings_cm0": 0.07449520549221056,
+            "savings_cm1": 0.06664400752715671,
+            "overstatement_pct": 10.53919901714318
+          },
+          "sticky-routellm@90%strong": {
+            "cm0": 2.3569086000000006,
+            "cm1": 1.9231934000000004,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.5876540745546185,
+            "savings_cm0": 0.02437153968585759,
+            "savings_cm1": 0.02582919027345465,
+            "overstatement_pct": -5.980954040597239
+          },
+          "random@90%strong": {
+            "cm0": 2.1952042,
+            "cm1": 1.8180010000000004,
+            "switches_per_conv": 0.48,
+            "cache_hit_rate": 0.5199461050950647,
+            "savings_cm0": 0.09130812551613654,
+            "savings_cm1": 0.07911315302263977,
+            "overstatement_pct": 13.355845851135777
+          }
+        }
+      }
+    },
+    "lmsys": {
+      "n_convs": 50,
+      "real_ts_convs": 0,
+      "providers": {
+        "anthropic": {
+          "fixed-small": {
+            "cm0": 0.5615859999999999,
+            "cm1": 0.39726855000000016,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6346753656371198,
+            "savings_cm0": 0.6666666666666667,
+            "savings_cm1": 0.6666666666666665,
+            "overstatement_pct": 3.330669073875469e-14
+          },
+          "fixed-large": {
+            "cm0": 1.6847580000000002,
+            "cm1": 1.1918056499999998,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6346753656371198,
+            "savings_cm0": 0.0,
+            "savings_cm1": 0.0,
+            "overstatement_pct": NaN
+          },
+          "routellm@10%strong": {
+            "cm0": 0.6570919999999998,
+            "cm1": 0.5202446000000002,
+            "switches_per_conv": 0.46,
+            "cache_hit_rate": 0.5823501238259894,
+            "savings_cm0": 0.6099784063942717,
+            "savings_cm1": 0.5634820157128805,
+            "overstatement_pct": 7.622628964235391
+          },
+          "sticky-routellm@10%strong": {
+            "cm0": 0.7516419999999998,
+            "cm1": 0.52822245,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6346753656371198,
+            "savings_cm0": 0.5538575866682338,
+            "savings_cm1": 0.5567880971196939,
+            "overstatement_pct": -0.5291090204412952
+          },
+          "random@10%strong": {
+            "cm0": 0.665948,
+            "cm1": 0.5229803500000001,
+            "switches_per_conv": 0.6,
+            "cache_hit_rate": 0.5864533199383206,
+            "savings_cm0": 0.6047218650987264,
+            "savings_cm1": 0.5611865491659649,
+            "overstatement_pct": 7.199229669933294
+          },
+          "routellm@30%strong": {
+            "cm0": 1.0397640000000001,
+            "cm1": 0.7319920499999997,
+            "switches_per_conv": 0.58,
+            "cache_hit_rate": 0.5575352787252932,
+            "savings_cm0": 0.3828407403318459,
+            "savings_cm1": 0.3858125693564217,
+            "overstatement_pct": -0.7762572556932799
+          },
+          "sticky-routellm@30%strong": {
+            "cm0": 0.8168519999999998,
+            "cm1": 0.57546395,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6346753656371198,
+            "savings_cm0": 0.5151517309904451,
+            "savings_cm1": 0.5171495033607199,
+            "overstatement_pct": -0.3878027093947236
+          },
+          "random@30%strong": {
+            "cm0": 0.926368,
+            "cm1": 0.7296512999999998,
+            "switches_per_conv": 1.06,
+            "cache_hit_rate": 0.5192748002429793,
+            "savings_cm0": 0.45014773635145233,
+            "savings_cm1": 0.3877766060263266,
+            "overstatement_pct": 13.855702314679544
+          },
+          "routellm@50%strong": {
+            "cm0": 1.2273379999999996,
+            "cm1": 0.8902562499999996,
+            "switches_per_conv": 0.92,
+            "cache_hit_rate": 0.5437158310359329,
+            "savings_cm0": 0.27150486894853776,
+            "savings_cm1": 0.2530189381129383,
+            "overstatement_pct": 6.808692200324175
+          },
+          "sticky-routellm@50%strong": {
+            "cm0": 1.330824,
+            "cm1": 0.8838303499999999,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6346753656371198,
+            "savings_cm0": 0.21008002336240583,
+            "savings_cm1": 0.25841067291466524,
+            "overstatement_pct": -23.00582834041528
+          },
+          "random@50%strong": {
+            "cm0": 1.0942200000000002,
+            "cm1": 0.8962817,
+            "switches_per_conv": 1.46,
+            "cache_hit_rate": 0.5015770291107892,
+            "savings_cm0": 0.35051799724352095,
+            "savings_cm1": 0.24796320608146127,
+            "overstatement_pct": 29.258067194424303
+          },
+          "routellm@70%strong": {
+            "cm0": 1.4278619999999993,
+            "cm1": 1.0244342999999998,
+            "switches_per_conv": 0.68,
+            "cache_hit_rate": 0.5727828138872015,
+            "savings_cm0": 0.1524824336789028,
+            "savings_cm1": 0.14043510365972844,
+            "overstatement_pct": 7.9007986221833235
+          },
+          "sticky-routellm@70%strong": {
+            "cm0": 1.4289859999999996,
+            "cm1": 0.9668937499999999,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6346753656371198,
+            "savings_cm0": 0.1518152755469928,
+            "savings_cm1": 0.1887152490005396,
+            "overstatement_pct": -24.30583702502637
+          },
+          "random@70%strong": {
+            "cm0": 1.326928,
+            "cm1": 1.0163986,
+            "switches_per_conv": 1.4,
+            "cache_hit_rate": 0.5156359515910471,
+            "savings_cm0": 0.21239252165592926,
+            "savings_cm1": 0.14717756204629484,
+            "overstatement_pct": 30.70492270687434
+          },
+          "routellm@90%strong": {
+            "cm0": 1.5935939999999997,
+            "cm1": 1.1413023,
+            "switches_per_conv": 0.4,
+            "cache_hit_rate": 0.5991600859772908,
+            "savings_cm0": 0.05411103553151286,
+            "savings_cm1": 0.04237549133954843,
+            "overstatement_pct": 21.68789430231834
+          },
+          "sticky-routellm@90%strong": {
+            "cm0": 1.6214919999999997,
+            "cm1": 1.13400275,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6346753656371198,
+            "savings_cm0": 0.0375519807592547,
+            "savings_cm1": 0.04850027351355468,
+            "overstatement_pct": -29.155033990055962
+          },
+          "random@90%strong": {
+            "cm0": 1.5379960000000001,
+            "cm1": 1.14823855,
+            "switches_per_conv": 0.52,
+            "cache_hit_rate": 0.5593809868697724,
+            "savings_cm0": 0.08711162077877066,
+            "savings_cm1": 0.036555540746093795,
+            "overstatement_pct": 58.03597680850121
+          }
+        },
+        "openai": {
+          "fixed-small": {
+            "cm0": 0.31065120000000007,
+            "cm1": 0.24725280000000002,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6171674220830802,
+            "savings_cm0": 0.88,
+            "savings_cm1": 0.88,
+            "overstatement_pct": 0.0
+          },
+          "fixed-large": {
+            "cm0": 2.5887599999999997,
+            "cm1": 2.0604400000000003,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6171674220830802,
+            "savings_cm0": 0.0,
+            "savings_cm1": 0.0,
+            "overstatement_pct": NaN
+          },
+          "routellm@10%strong": {
+            "cm0": 0.5021392,
+            "cm1": 0.4380496000000001,
+            "switches_per_conv": 0.46,
+            "cache_hit_rate": 0.5663286762300828,
+            "savings_cm0": 0.8060309955345416,
+            "savings_cm1": 0.7873999728213391,
+            "overstatement_pct": 2.311452390344719
+          },
+          "sticky-routellm@10%strong": {
+            "cm0": 0.6963991999999999,
+            "cm1": 0.5519000000000002,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6171674220830802,
+            "savings_cm0": 0.730991208145985,
+            "savings_cm1": 0.7321445904758206,
+            "overstatement_pct": -0.15778333815545692
+          },
+          "random@10%strong": {
+            "cm0": 0.5204036,
+            "cm1": 0.4501828000000001,
+            "switches_per_conv": 0.6,
+            "cache_hit_rate": 0.5711882622307369,
+            "savings_cm0": 0.7989757258301271,
+            "savings_cm1": 0.7815113276775834,
+            "overstatement_pct": 2.1858484041424946
+          },
+          "routellm@30%strong": {
+            "cm0": 1.2904167999999998,
+            "cm1": 0.9975527999999999,
+            "switches_per_conv": 0.58,
+            "cache_hit_rate": 0.5427783748422971,
+            "savings_cm0": 0.501530926003183,
+            "savings_cm1": 0.5158544776843782,
+            "overstatement_pct": -2.855965791649753
+          },
+          "sticky-routellm@30%strong": {
+            "cm0": 0.8284036000000001,
+            "cm1": 0.6582788,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6171674220830802,
+            "savings_cm0": 0.6799998454858696,
+            "savings_cm1": 0.6805154238900429,
+            "overstatement_pct": -0.07582037078331831
+          },
+          "random@30%strong": {
+            "cm0": 1.0569879999999996,
+            "cm1": 0.8769047999999998,
+            "switches_per_conv": 1.06,
+            "cache_hit_rate": 0.5057707583757768,
+            "savings_cm0": 0.5917010460606624,
+            "savings_cm1": 0.5744089611927551,
+            "overstatement_pct": 2.92243608204379
+          },
+          "routellm@50%strong": {
+            "cm0": 1.6662999999999997,
+            "cm1": 1.3187031999999999,
+            "switches_per_conv": 0.92,
+            "cache_hit_rate": 0.5300686883790477,
+            "savings_cm0": 0.3563327616310512,
+            "savings_cm1": 0.35998951680223656,
+            "overstatement_pct": -1.02621918749407
+          },
+          "sticky-routellm@50%strong": {
+            "cm0": 1.8759423999999998,
+            "cm1": 1.4371711999999996,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6171674220830802,
+            "savings_cm0": 0.27535097884701554,
+            "savings_cm1": 0.3024930597348142,
+            "overstatement_pct": -9.85726689676261
+          },
+          "random@50%strong": {
+            "cm0": 1.3892276000000001,
+            "cm1": 1.1844404000000002,
+            "switches_per_conv": 1.46,
+            "cache_hit_rate": 0.4885753002196159,
+            "savings_cm0": 0.46336176393331163,
+            "savings_cm1": 0.42515171516763406,
+            "overstatement_pct": 8.246267115639018
+          },
+          "routellm@70%strong": {
+            "cm0": 2.0696216,
+            "cm1": 1.6422679999999998,
+            "switches_per_conv": 0.68,
+            "cache_hit_rate": 0.5581047614597449,
+            "savings_cm0": 0.20053554597567935,
+            "savings_cm1": 0.2029527673700765,
+            "overstatement_pct": -1.2053830071055374
+          },
+          "sticky-routellm@70%strong": {
+            "cm0": 2.0746244,
+            "cm1": 1.6079748,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6171674220830802,
+            "savings_cm0": 0.19860303774780197,
+            "savings_cm1": 0.2195963968861021,
+            "overstatement_pct": -10.570512604625295
+          },
+          "random@70%strong": {
+            "cm0": 1.86364,
+            "cm1": 1.5240304000000002,
+            "switches_per_conv": 1.4,
+            "cache_hit_rate": 0.5016588009906079,
+            "savings_cm0": 0.2801032154390518,
+            "savings_cm1": 0.26033740366135383,
+            "overstatement_pct": 7.056617235441506
+          },
+          "routellm@90%strong": {
+            "cm0": 2.4050072,
+            "cm1": 1.9171095999999999,
+            "switches_per_conv": 0.4,
+            "cache_hit_rate": 0.5827765057707583,
+            "savings_cm0": 0.07098101021338388,
+            "savings_cm1": 0.06956300595989229,
+            "overstatement_pct": 1.9977234040890228
+          },
+          "sticky-routellm@90%strong": {
+            "cm0": 2.4642488,
+            "cm1": 1.947756,
+            "switches_per_conv": 0.0,
+            "cache_hit_rate": 0.6171674220830802,
+            "savings_cm0": 0.04809684945688275,
+            "savings_cm1": 0.054689289666284946,
+            "overstatement_pct": -13.706594681034362
+          },
+          "random@90%strong": {
+            "cm0": 2.2888428000000003,
+            "cm1": 1.859006,
+            "switches_per_conv": 0.52,
+            "cache_hit_rate": 0.543899817765525,
+            "savings_cm0": 0.11585361331293731,
+            "savings_cm1": 0.09776261381064255,
+            "overstatement_pct": 15.61539513957874
+          }
+        }
+      }
+    }
+  }
+}

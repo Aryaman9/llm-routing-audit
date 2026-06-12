@@ -21,7 +21,9 @@ Run:  python experiments/gate_a_replay.py [--limit 300] [--gap-s 30]
 """
 
 import argparse
+import functools
 import json
+import os
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -33,6 +35,13 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from realcost import Trajectory, Turn, load_snapshot, replay  # noqa: E402
 from realcost.pricing import default_snapshot_path  # noqa: E402
+
+# Env overrides so the same script runs locally and on Kaggle (read-only input
+# dirs, writable /kaggle/working).
+DATA_DIR = Path(os.environ.get("AUDIT_DATA_DIR", ROOT / "data"))
+OUT_DIR = Path(os.environ.get("AUDIT_OUT_DIR", ROOT / "results"))
+
+print = functools.partial(print, flush=True)  # background runs: never buffer
 
 ROUTER_ID = "routellm/bert_gpt4_augmented"
 TARGET_STRONG_RATES = [0.1, 0.3, 0.5, 0.7, 0.9]
@@ -105,15 +114,20 @@ def to_trajectory(conv, default_gap_s):
 
 # ---------------------------------------------------------------- router
 
-def score_conversations(convs, batch_size=32):
-    """RouteLLM BERT router scores for every user turn, batched, CPU."""
+def score_conversations(convs, ds_name, batch_size=None):
+    """RouteLLM BERT router scores for every user turn, batched, GPU if
+    available, checkpointed to OUT_DIR every ~1024 texts so a killed run
+    resumes instead of restarting."""
     import torch
     from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    batch_size = batch_size or (128 if device == "cuda" else 32)
     tok = AutoTokenizer.from_pretrained(ROUTER_ID)
-    model = AutoModelForSequenceClassification.from_pretrained(ROUTER_ID)
+    model = AutoModelForSequenceClassification.from_pretrained(ROUTER_ID).to(device)
     model.eval()
-    print(f"router loaded: {ROUTER_ID} | labels: {model.config.id2label}")
+    print(f"router loaded: {ROUTER_ID} | device={device} | batch={batch_size} "
+          f"| labels: {model.config.id2label}")
 
     texts, owners = [], []
     for ci, conv in enumerate(convs):
@@ -121,16 +135,28 @@ def score_conversations(convs, batch_size=32):
             texts.append((u["text"] or "")[:4000])
             owners.append((ci, pi))
 
+    ckpt = OUT_DIR / f"router_scores_{ds_name}_{len(texts)}.npz"
+    done = 0
     probs = np.zeros((len(texts), model.config.num_labels), dtype=np.float64)
+    if ckpt.exists():
+        saved = np.load(ckpt)
+        if saved["probs"].shape == probs.shape:
+            probs, done = saved["probs"], int(saved["done"])
+            print(f"  resumed from checkpoint: {done}/{len(texts)} already scored")
+
     with torch.no_grad():
-        for s in range(0, len(texts), batch_size):
+        for s in range(done, len(texts), batch_size):
             batch = texts[s:s + batch_size]
             ins = tok(batch, return_tensors="pt", truncation=True,
-                      max_length=512, padding=True)
+                      max_length=512, padding=True).to(device)
             logits = model(**ins).logits
-            probs[s:s + len(batch)] = torch.softmax(logits, dim=-1).numpy()
-            if (s // batch_size) % 20 == 0:
-                print(f"  scored {s + len(batch)}/{len(texts)}")
+            probs[s:s + len(batch)] = torch.softmax(logits, dim=-1).cpu().numpy()
+            if (s - done) % 1024 < batch_size:
+                OUT_DIR.mkdir(parents=True, exist_ok=True)
+                np.savez(ckpt, probs=probs, done=s + len(batch))
+                print(f"  scored {s + len(batch)}/{len(texts)} (checkpointed)")
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    np.savez(ckpt, probs=probs, done=len(texts))
 
     # Label-convention sanity check, done BEHAVIORALLY: class-0 probability
     # should differ systematically between trivially-easy and clearly-hard
@@ -185,6 +211,12 @@ def make_policies(conv_scores, thresholds, rng):
 # ---------------------------------------------------------------- main
 
 def main():
+    if sys.platform == "win32":
+        # keep the system awake while the run is alive (display may sleep);
+        # cleared automatically when the process exits
+        import ctypes
+        ctypes.windll.kernel32.SetThreadExecutionState(0x80000001)
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None, help="convs per dataset")
     ap.add_argument("--gap-s", type=float, default=30.0,
@@ -198,13 +230,13 @@ def main():
               "datasets": {}}
 
     for ds_name in ("wildchat", "lmsys"):
-        path = ROOT / "data" / f"{ds_name}_sample.jsonl"
+        path = DATA_DIR / f"{ds_name}_sample.jsonl"
         if not path.exists():
             print(f"[skip] {path} missing")
             continue
         convs = load_convs(path, args.limit)
         print(f"\n#### {ds_name}: {len(convs)} conversations")
-        scores = score_conversations(convs)
+        scores = score_conversations(convs, ds_name)
         flat = np.concatenate([np.array(s) for s in scores])
         thresholds = {r: float(np.quantile(flat, 1 - r)) for r in TARGET_STRONG_RATES}
         trajs, used_real = [], 0
@@ -248,8 +280,8 @@ def main():
             ds_out["providers"][prov] = rows
         report["datasets"][ds_name] = ds_out
 
-    out = ROOT / "results" / f"gate_a_{date.today()}.json"
-    out.parent.mkdir(exist_ok=True)
+    out = OUT_DIR / f"gate_a_{date.today()}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"\nsaved -> {out}")
 
