@@ -8,9 +8,9 @@ Output (data/, gitignored - raw user conversations must never be committed):
   data/wildchat_sample.jsonl   - has per-turn timestamps -> TTL realism (E3b)
   data/lmsys_sample.jsonl      - scale/diversity; no per-turn timestamps
 
-Each line: {conv_id, n_turns, turns: [{role, n_tokens_cl100k, ts|null}]}
-Token counts only - we never persist message text we don't need at this stage
-(quality judging in Phase 3 re-streams text for the selected subsample).
+Each line: {conv_id, n_turns, turns: [{role, n_tokens_cl100k, ts|null, text}]}
+Text is kept LOCALLY (data/ is gitignored) because routers need the user
+message text to route; it must never be committed or uploaded.
 
 Run:  python scripts/download_data.py --per-dataset 2000 --min-turns 4
 """
@@ -62,9 +62,11 @@ def main():
                     if ts_mode == "per_message":
                         raw_ts = m.get("timestamp")
                         ts = str(raw_ts) if raw_ts is not None else None
+                    content = m.get("content") or ""
                     turns.append({"role": m.get("role"),
-                                  "n_tokens_cl100k": ntok(m.get("content") or ""),
-                                  "ts": ts})
+                                  "n_tokens_cl100k": ntok(content),
+                                  "ts": ts,
+                                  "text": content})
                 rec = {"conv_id": row.get("conversation_id") or f"{short}-{i}",
                        "model_logged": row.get("model"),
                        "n_turns": len(turns), "turns": turns}
