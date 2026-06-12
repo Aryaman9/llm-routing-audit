@@ -1,0 +1,9 @@
+# core (Phase 0): stdlib-only library; pytest for tests
+pytest>=8.0
+
+# Phase 0 Gate A / data work (uncomment when HF access is ready)
+# datasets>=3.0
+# huggingface_hub>=0.30
+# pandas>=2.2
+# matplotlib>=3.9
+# transformers>=4.50   # RouteLLM BERT router inference (CPU is fine)

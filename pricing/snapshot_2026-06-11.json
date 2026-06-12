@@ -1,0 +1,61 @@
+{
+  "snapshot_date": "2026-06-11",
+  "currency": "USD per 1M tokens",
+  "status": "WEB-SWEEP DRAFT. Cache parameters (read_multiplier, write_multiplier, ttl) sourced from secondary references on 2026-06-11. Model list prices are PLACEHOLDERS pending verification against official pricing pages + live API usage-metadata probes (Phase 1 / experiment E1). Nothing in this file is paper-grade until verified_by_probe=true and an archive.org snapshot of the official page is linked.",
+  "providers": {
+    "anthropic": {
+      "cache_read_multiplier": 0.10,
+      "cache_write_multiplier": 1.25,
+      "cache_write_multiplier_1h_ttl": 2.0,
+      "cache_ttl_seconds": 300,
+      "cache_ttl_refreshes_on_read": true,
+      "min_cacheable_prefix_tokens": 1024,
+      "cache_block_tokens": 1,
+      "caching_is_explicit": true,
+      "verified_by_probe": false,
+      "sources": [
+        "https://www.finout.io/blog/anthropic-api-pricing",
+        "https://artificialanalysis.ai/models/caching"
+      ],
+      "models": {
+        "small": {"alias_note": "Haiku-class placeholder", "p_in": 1.0, "p_out": 5.0},
+        "large": {"alias_note": "Sonnet-class placeholder", "p_in": 3.0, "p_out": 15.0},
+        "frontier": {"alias_note": "Opus-class placeholder", "p_in": 15.0, "p_out": 75.0}
+      }
+    },
+    "openai": {
+      "cache_read_multiplier": 0.50,
+      "cache_write_multiplier": 1.0,
+      "cache_ttl_seconds": 300,
+      "cache_ttl_refreshes_on_read": true,
+      "min_cacheable_prefix_tokens": 1024,
+      "cache_block_tokens": 128,
+      "caching_is_explicit": false,
+      "verified_by_probe": false,
+      "sources": [
+        "https://aicostcheck.com/blog/ai-prompt-caching-cost-savings"
+      ],
+      "models": {
+        "small": {"alias_note": "mini-class placeholder", "p_in": 0.6, "p_out": 2.4},
+        "large": {"alias_note": "flagship-class placeholder", "p_in": 5.0, "p_out": 20.0}
+      }
+    },
+    "deepseek": {
+      "cache_read_multiplier": 0.05,
+      "cache_write_multiplier": 1.0,
+      "cache_ttl_seconds": 3600,
+      "cache_ttl_refreshes_on_read": true,
+      "min_cacheable_prefix_tokens": 64,
+      "cache_block_tokens": 64,
+      "caching_is_explicit": false,
+      "verified_by_probe": false,
+      "sources": [
+        "https://costgoat.com/pricing/deepseek-api"
+      ],
+      "models": {
+        "small": {"alias_note": "V4 Flash placeholder, cache hit $0.0028/M vs miss $0.14/M", "p_in": 0.14, "p_out": 0.42},
+        "large": {"alias_note": "V4 Pro placeholder", "p_in": 0.6, "p_out": 1.8}
+      }
+    }
+  }
+}
