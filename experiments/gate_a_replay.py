@@ -126,6 +126,17 @@ def score_conversations(convs, ds_name, batch_size=None):
     tok = AutoTokenizer.from_pretrained(ROUTER_ID)
     model = AutoModelForSequenceClassification.from_pretrained(ROUTER_ID).to(device)
     model.eval()
+    if device == "cuda":
+        # Some Kaggle images ship torch builds without kernels for the
+        # allocated GPU (cudaErrorNoKernelImageForDevice) - smoke-test one
+        # forward pass and fall back to CPU instead of dying mid-run.
+        try:
+            with torch.no_grad():
+                model(**tok(["smoke test"], return_tensors="pt").to(device))
+        except Exception as e:  # noqa: BLE001
+            print(f"CUDA unusable ({type(e).__name__}); falling back to CPU")
+            device, batch_size = "cpu", 32
+            model = model.to(device)
     print(f"router loaded: {ROUTER_ID} | device={device} | batch={batch_size} "
           f"| labels: {model.config.id2label}")
 
