@@ -2,6 +2,9 @@
 (experiments/gate_a_replay.py); this script just wires the Kaggle environment:
 clone repo -> point AUDIT_DATA_DIR at the attached private dataset ->
 run the replay at two inter-turn gap settings -> outputs in /kaggle/working.
+
+v5: identical to v4; re-push after v4 died at Kaggle startup with an empty log
+(infrastructure flake - no user code ran).
 """
 
 import glob
