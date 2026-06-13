@@ -259,6 +259,8 @@ def main():
 
         policies = make_policies(scores, thresholds, rng)
         ds_out = {"n_convs": len(trajs), "real_ts_convs": used_real, "providers": {}}
+        # per-conversation cost arrays for bootstrap CIs (gate_a_bootstrap.py)
+        per_conv = {"conv_ids": np.array([t.conv_id for t in trajs])}
 
         for prov in ("anthropic", "openai"):
             pp = snap[prov]
@@ -266,12 +268,15 @@ def main():
             caches = {m: pp.cache for m in prices}
             rows = {}
             for pname, decisions in policies.items():
-                cm0 = cm1 = sw = hits = ins = 0.0
-                for tr, dec in zip(trajs, decisions):
+                c0 = np.empty(len(trajs)); c1 = np.empty(len(trajs))
+                sw = hits = ins = 0.0
+                for j, (tr, dec) in enumerate(zip(trajs, decisions)):
                     bd = replay(tr, seq_policy(dec), prices, caches).breakdown
-                    cm0 += bd.cm0; cm1 += bd.cm1; sw += bd.switches
+                    c0[j] = bd.cm0; c1[j] = bd.cm1; sw += bd.switches
                     hits += bd.cached_tokens; ins += bd.input_tokens
-                rows[pname] = {"cm0": cm0, "cm1": cm1,
+                per_conv[f"{prov}|{pname}|cm0"] = c0
+                per_conv[f"{prov}|{pname}|cm1"] = c1
+                rows[pname] = {"cm0": float(c0.sum()), "cm1": float(c1.sum()),
                                "switches_per_conv": sw / len(trajs),
                                "cache_hit_rate": hits / ins if ins else 0}
             base0, base1 = rows["fixed-large"]["cm0"], rows["fixed-large"]["cm1"]
@@ -290,6 +295,10 @@ def main():
                       f"{r['cache_hit_rate'] * 100:>6.1f}")
             ds_out["providers"][prov] = rows
         report["datasets"][ds_name] = ds_out
+
+        pc_path = OUT_DIR / f"gate_a_perconv_{ds_name}_{date.today()}.npz"
+        np.savez_compressed(pc_path, gap_s=args.gap_s, **per_conv)
+        print(f"per-conv arrays -> {pc_path}")
 
     out = OUT_DIR / f"gate_a_{date.today()}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
